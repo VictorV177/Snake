@@ -1,13 +1,7 @@
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to arrow keys.
-
 """
-
+Juego de Snake
+Autor: Rafael Valenzuela Zurita
+"""
 from turtle import *
 from random import randrange
 from freegames import square, vector
@@ -17,16 +11,22 @@ snake = [vector(10, 0)]
 aim = vector(0, -10)
 
 def change(x, y):
-    "Change snake direction."
+    """ Cambia la dirección de la serpiente """
     aim.x = x
     aim.y = y
 
+
 def inside(head):
-    "Return True if head inside boundaries."
+    """ Detecta si la sepriente esta dentro de la ventana """
     return -200 < head.x < 190 and -200 < head.y < 190
 
+
 def move():
-    "Move snake forward one segment."
+    """ Mueve a la serpiente un lugar
+        Comprueba que este dentro del tablero
+        Incrementa su tamaño cuando es necesario
+        Mueve la comida un paso a la vez sin salir de la ventana
+    """
     head = snake[-1].copy()
     head.move(aim)
 
@@ -34,6 +34,10 @@ def move():
         square(head.x, head.y, 9, 'red')
         update()
         return
+    
+    if not inside(food):
+        food.x = 0
+        food.y = 0
 
     snake.append(head)
 
@@ -43,6 +47,7 @@ def move():
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
+        food.move(randrange(-1,2)*10)
 
     clear()
 
