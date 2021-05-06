@@ -1,3 +1,4 @@
+"""Snake, classic arcade game.
 
 Exercises
 
@@ -16,6 +17,23 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+"snake"
+head = turtle.Turtle()
+head.shape("square")
+color = random.choice(['yellow', 'green', 'black'])
+head.penup()
+head.goto(0, 0)
+head.direction = "Stop"
+
+"Food color"
+food = turtle.Turtle()
+colors = random.choice(['blue', 'green', 'black'])
+shapes = random.choice(['square', 'triangle', 'circle'])
+food.speed(0)
+food.shape(shapes)
+food.color(colors)
+food.penup()
+food.goto(0, 100)
 def change(x, y):
     "Change snake direction."
     aim.x = x
